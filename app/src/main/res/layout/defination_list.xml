@@ -39,7 +39,11 @@
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/textView_synonyms"
-            android:textStyle="normal"
+            android:textStyle="italic"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
             android:textSize="18sp"
             android:textAlignment="center"
             android:padding="10dp"
@@ -56,7 +60,11 @@
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/textView_antonyms"
-            android:textStyle="normal"
+            android:textStyle="italic"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
             android:textSize="18sp"
             android:textAlignment="center"
             android:padding="10dp"
