@@ -1,5 +1,6 @@
 package com.example.khojam.Adapters;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class MeaningAdapter extends RecyclerView.Adapter<MeaningViewHolder> {
     private Context context;
-    protected List<Meanings> meaningsList;
+    private List<Meanings> meaningsList;
 
     public MeaningAdapter(Context context, List<Meanings> meaningsList) {
         this.context = context;
@@ -26,17 +27,19 @@ public class MeaningAdapter extends RecyclerView.Adapter<MeaningViewHolder> {
     @NonNull
     @Override
     public MeaningViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MeaningViewHolder(LayoutInflater.from(context).inflate(R.layout.phonetic_list_items, parent, false));
+        return new MeaningViewHolder(LayoutInflater.from(context).inflate(R.layout.meanings_ltem, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull MeaningViewHolder holder, int position) {
-        holder.textView_partsOfSpeech.setText("parts of speech" + meaningsList.get(position).getPartOfSpeech());
-        holder.recycler_definition.setHasFixedSize(true);
-        holder.recycler_definition.setLayoutManager(new GridLayoutManager(context, 1));
+        holder.textView_partsOfSpeech.setText("Parts of Speech: " + meaningsList.get(position).getPartOfSpeech());
+
+        holder.recycler_definitions.setHasFixedSize(true);
+        holder.recycler_definitions.setLayoutManager(new GridLayoutManager(context, 1));
         DefinitionAdapter definitionAdapter = new DefinitionAdapter(context, meaningsList.get(position).getDefinitions());
-        holder.recycler_definition.setAdapter(definitionAdapter);
+        holder.recycler_definitions.setAdapter(definitionAdapter);
     }
+
 
     @Override
     public int getItemCount() {

@@ -3,11 +3,10 @@ package com.example.khojam.Models;
 import java.util.List;
 
 public class APIResponse {
-    String word ="";
-    String phonetic ="";
+    String word = "";
     List<Phonetics> phonetics = null;
-    String origin ="";
-    List <Meanings> meanings = null;
+    String origin = "";
+    List<Meanings> meanings = null;
 
     public String getWord() {
         return word;
@@ -15,14 +14,6 @@ public class APIResponse {
 
     public void setWord(String word) {
         this.word = word;
-    }
-
-    public String getPhonetic() {
-        return phonetic;
-    }
-
-    public void setPhonetic(String phonetic) {
-        this.phonetic = phonetic;
     }
 
     public List<Phonetics> getPhonetics() {

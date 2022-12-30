@@ -35,7 +35,7 @@ public class PhoneticsAdapter extends RecyclerView.Adapter<PhoneticViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull PhoneticViewHolder holder, int position) {
-        holder.textview_phonetic.setText(phoneticsList.get(position).getText());
+        holder.textView_phonetic.setText(phoneticsList.get(position).getText());
         holder.imageButton_audio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
