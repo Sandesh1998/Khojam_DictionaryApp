@@ -1,5 +1,6 @@
 package com.example.khojam.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -20,6 +21,8 @@ import java.util.List;
 public class PhoneticsAdapter extends RecyclerView.Adapter<PhoneticViewHolder> {
     private Context context;
     private List<Phonetics> phoneticsList;
+    private PhoneticViewHolder holder;
+    private int position;
 
     public PhoneticsAdapter(Context context, List<Phonetics> phoneticsList) {
         this.context = context;
@@ -34,7 +37,9 @@ public class PhoneticsAdapter extends RecyclerView.Adapter<PhoneticViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PhoneticViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PhoneticViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        this.holder = holder;
+        this.position = position;
         holder.textView_phonetic.setText(phoneticsList.get(position).getText());
         holder.imageButton_audio.setOnClickListener(new View.OnClickListener() {
             @Override
