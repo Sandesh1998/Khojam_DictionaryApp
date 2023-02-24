@@ -2,6 +2,7 @@ package com.example.khojam.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.view.LayoutInflater;
@@ -21,8 +22,7 @@ import java.util.List;
 public class PhoneticsAdapter extends RecyclerView.Adapter<PhoneticViewHolder> {
     private Context context;
     private List<Phonetics> phoneticsList;
-    private PhoneticViewHolder holder;
-    private int position;
+    MediaPlayer player;
 
     public PhoneticsAdapter(Context context, List<Phonetics> phoneticsList) {
         this.context = context;
@@ -38,22 +38,29 @@ public class PhoneticsAdapter extends RecyclerView.Adapter<PhoneticViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull PhoneticViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        this.holder = holder;
-        this.position = position;
         holder.textView_phonetic.setText(phoneticsList.get(position).getText());
         holder.imageButton_audio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer player = new MediaPlayer();
-                try{
-                    player.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                    player.setDataSource("https:" + phoneticsList.get(position).getAudio());
-                    player.prepare();
-                    player.start();
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                    Toast.makeText(context, "Couldn't play audio", Toast.LENGTH_SHORT).show();
+                player = new MediaPlayer();
+
+                player.setAudioAttributes(new AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_MEDIA)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .setLegacyStreamType(AudioManager.STREAM_MUSIC)
+                        .build());
+                player.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                try {
+                    player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mp) {
+                            mp.start();
+                        }
+                    });
+                    player.setDataSource(phoneticsList.get(position).getAudio());
+                    player.prepareAsync();
+                } catch (Exception e) {
+                    e.printStackTrace(); Toast.makeText(context, "Couldn't play audio", Toast.LENGTH_SHORT).show();
                 }
             }
         });
