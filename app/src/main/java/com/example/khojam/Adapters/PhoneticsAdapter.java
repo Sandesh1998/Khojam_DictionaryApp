@@ -23,6 +23,7 @@ public class PhoneticsAdapter extends RecyclerView.Adapter<PhoneticViewHolder> {
     private List<Phonetics> phoneticsList;
     private PhoneticViewHolder holder;
     private int position;
+    MediaPlayer player;
 
     public PhoneticsAdapter(Context context, List<Phonetics> phoneticsList) {
         this.context = context;
@@ -44,16 +45,27 @@ public class PhoneticsAdapter extends RecyclerView.Adapter<PhoneticViewHolder> {
         holder.imageButton_audio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaPlayer player = new MediaPlayer();
-                try{
+                     player = new MediaPlayer();
+
+                    player.setAudioAttributes(new AudioAttributes.Builder()
+                            .setUsage(AudioAttributes.USAGE_MEDIA)
+                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                            .setLegacyStreamType(AudioManager.STREAM_MUSIC)
+                            .build());
+
                     player.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                    player.setDataSource("https:" + phoneticsList.get(position).getAudio());
-                    player.prepare();
-                    player.start();
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                    Toast.makeText(context, "Couldn't play audio", Toast.LENGTH_SHORT).show();
+
+                try {
+                    player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mp) {
+                            mp.start();
+                        }
+                    });
+                    player.setDataSource(phoneticsList.get(position).getAudio());
+                    player.prepareAsync();
+                } catch (Exception e) {
+                    e.printStackTrace(); Toast.makeText(context, "Couldn't play audio", Toast.LENGTH_SHORT).show();
                 }
             }
         });
