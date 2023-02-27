@@ -28,6 +28,11 @@ My app is user-friendly, reliable and comprehensive dictionary app that helps us
 https://youtube.com/shorts/YUBJcZBfXyo
 
 
+## Dictionary API
+
+https://dictionaryapi.dev/
+
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
