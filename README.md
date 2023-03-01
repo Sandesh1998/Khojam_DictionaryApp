@@ -25,7 +25,7 @@ My app is user-friendly, reliable and comprehensive dictionary app that helps us
 
 ## Demo
 
-https://youtube.com/shorts/YUBJcZBfXyo
+[https://youtube.com/shorts/wqxI2YbNPwk](https://youtube.com/shorts/wqxI2YbNPwk)
 
 
 ## Dictionary API
